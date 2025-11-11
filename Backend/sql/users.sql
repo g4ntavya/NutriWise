@@ -1,0 +1,14 @@
+-- users.sql  (MySQL / MariaDB)
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` CHAR(36) NOT NULL,
+  `email` VARCHAR(255) NOT NULL UNIQUE,
+  `display_name` VARCHAR(255) NULL,
+  `phone` VARCHAR(32) NULL,
+  `role` ENUM('user','admin') NOT NULL DEFAULT 'user',
+  `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
