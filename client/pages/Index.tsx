@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "@/lib/auth";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import LoginOverlay from "@/components/LoginOverlay";
@@ -8,6 +9,7 @@ import { Star } from "lucide-react";
 export default function Index() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   return (
     <div className="min-h-screen bg-white">
@@ -17,6 +19,7 @@ export default function Index() {
         onClose={() => setIsLoginOpen(false)}
         onSuccess={() => {
           setIsLoginOpen(false);
+          // After successful login open the protected NutriWise UI
           navigate('/app');
         }}
       />
@@ -63,7 +66,7 @@ export default function Index() {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          d="M0 50 L341 10"
+                          d="M0 55 L341 50"
                           stroke="#DF6951"
                           strokeWidth="8"
                           fill="none"
@@ -83,12 +86,14 @@ export default function Index() {
                   NutriWise creates AI meal plans by diet, budget, and local food culture.
                 </p>
 
-                <button
-                  onClick={() => setIsLoginOpen(true)}
-                  className="inline-flex items-center justify-center bg-[#44A70F] text-white px-14 py-4 rounded-lg font-['Helvetica_Neue',sans-serif] text-base font-normal shadow-[0_18px_32px_rgba(241,165,1,0.15)] hover:bg-[#12953A] transition-colors mt-6 md:mt-8"
-                >
-                  Log In
-                </button>
+                {!user && (
+                  <button
+                    onClick={() => setIsLoginOpen(true)}
+                    className="inline-flex items-center justify-center bg-[#44A70F] text-white px-14 py-4 rounded-lg font-['Helvetica_Neue',sans-serif] text-base font-normal shadow-[0_18px_32px_rgba(241,165,1,0.15)] hover:bg-[#12953A] transition-colors mt-6 md:mt-8"
+                  >
+                    Log In
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -114,11 +119,17 @@ export default function Index() {
                 <button className="bg-[#12953A] text-white px-8 py-3 rounded-lg font-['Poppins'] font-medium hover:bg-[#44A70F] transition-colors">
                   Set My Budget
                 </button>
-                <button className="border border-[#5E6282] text-[#5E6282] px-8 py-3 rounded-lg font-['Poppins'] font-medium hover:bg-gray-50 transition-colors">
-                  Generate My Plan
-                </button>
+                {!user && (
+                  <button
+                    onClick={() => setIsLoginOpen(true)}
+                    className="bg-white text-[#12953A] px-8 py-3 rounded-lg font-['Poppins'] font-medium hover:bg-gray-100 transition-colors inline-block"
+                  >
+                    Get Started Now
+                  </button>
+                )}
               </div>
             </div>
+
             <div>
               <img
                 src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop"
@@ -294,12 +305,14 @@ export default function Index() {
           <p className="text-white/90 font-['Poppins'] text-base font-medium mb-8">
             Stay fit and financially smart with NutriWise
           </p>
-          <button
-            onClick={() => setIsLoginOpen(true)}
-            className="bg-white text-[#12953A] px-8 py-3 rounded-lg font-['Poppins'] font-medium hover:bg-gray-100 transition-colors inline-block"
-          >
-            Get Started Now
-          </button>
+          {!user && (
+            <button
+              onClick={() => setIsLoginOpen(true)}
+              className="bg-white text-[#12953A] px-8 py-3 rounded-lg font-['Poppins'] font-medium hover:bg-gray-100 transition-colors inline-block"
+            >
+              Get Started Now
+            </button>
+          )}
         </div>
       </section>
 
