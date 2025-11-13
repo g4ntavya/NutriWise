@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import LoginOverlay from "@/components/LoginOverlay";
 import TextPressure from "@/components/TextPressure";
@@ -6,11 +7,19 @@ import { Star } from "lucide-react";
 
 export default function Index() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-white">
       <Header onLoginClick={() => setIsLoginOpen(true)} />
-      <LoginOverlay isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+      <LoginOverlay
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        onSuccess={() => {
+          setIsLoginOpen(false);
+          navigate('/app');
+        }}
+      />
 
       {/* Hero Section */}
       <div className="relative min-h-[calc(100vh-69px)] flex items-center overflow-hidden bg-[#EAE9EA]">
@@ -31,7 +40,7 @@ export default function Index() {
                   style={{ fontFamily: '\"Gravitas One\", serif', fontWeight: 800 }}
                 >
                   <span className="relative inline-block">
-                    <TextPressure text="NutriWise" textColor="#12953A" strokeColor="#12953A" sizeMultiplier={6.5} />
+                    <TextPressure text="NutriWise" textColor="#12953A" strokeColor="#12953A" sizeMultiplier={8.6} />
                   </span>
                 </h1>
               </div>

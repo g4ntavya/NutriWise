@@ -13,9 +13,10 @@ interface LoginOverlayProps {
   // Optional controlled props (Index page used these)
   isOpen?: boolean;
   onClose?: () => void;
+  onSuccess?: () => void;
 }
 
-export default function LoginOverlay({ trigger, isOpen, onClose }: LoginOverlayProps) {
+export default function LoginOverlay({ trigger, isOpen, onClose, onSuccess }: LoginOverlayProps) {
   const [isSignUp, setIsSignUp] = useState(false);
   // Internal open state (used when not controlled via props)
   const [open, setOpen] = useState(false);
@@ -156,9 +157,15 @@ export default function LoginOverlay({ trigger, isOpen, onClose }: LoginOverlayP
                 </div>
 
                 {/* Sign In Button (Primary) */}
-                <button 
+                <button
                   // Styling to match the dark primary button
                   className="flex items-center justify-center py-2.5 rounded-lg bg-[#1A1A1A] text-white font-sans text-base font-medium tracking-tight hover:bg-[#333333] transition-colors shadow-md"
+                  onClick={() => {
+                    // Simulate successful login — call parent callback if provided
+                    if (onSuccess) onSuccess();
+                    // Close dialog if uncontrolled
+                    handleOpenChange(false);
+                  }}
                 >
                   Sign in
                 </button>
