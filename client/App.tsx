@@ -25,7 +25,8 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
-            {/* Mount NutriWise app under /app/* - protect this route so only signed-in users can access it */}
+            {/* Mount NutriWise app under /app/* - protect routes except onboarding */}
+            <Route path="/app/onboarding" element={<NutriwiseRoutes />} />
             <Route path="/app/*" element={<ProtectedRoute><NutriwiseRoutes /></ProtectedRoute>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
