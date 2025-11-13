@@ -1,0 +1,7 @@
+[
+  { "name": "Oats", "diet": ["veg"], "calories": 389, "protein": 17, "cost_per_serving": 10 },
+  { "name": "Paneer", "diet": ["veg"], "calories": 265, "protein": 20, "cost_per_serving": 30 },
+  { "name": "Chicken Breast", "diet": ["non-veg"], "calories": 165, "protein": 31, "cost_per_serving": 40 },
+  { "name": "Rice", "diet": ["veg", "non-veg"], "calories": 130, "protein": 2.7, "cost_per_serving": 5 },
+  { "name": "Dal", "diet": ["veg"], "calories": 116, "protein": 9, "cost_per_serving": 8 }
+]
