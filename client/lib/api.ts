@@ -1,10 +1,23 @@
 /**
  * API Client for NutriWise Backend
  */
+import { supabase } from "./supabaseClient";
+
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
 
 class ApiClient {
-  private getAuthToken(): string | null {
+  private async getAuthToken(): Promise<string | null> {
+    // Try Supabase session first (from Frontend_final)
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.access_token) {
+        return session.access_token;
+      }
+    } catch (e) {
+      // Fallback to localStorage (for backward compatibility)
+    }
+    
+    // Fallback to localStorage
     return localStorage.getItem("accessToken");
   }
 
@@ -12,7 +25,7 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const token = this.getAuthToken();
+    const token = await this.getAuthToken();
     const headers: HeadersInit = {
       "Content-Type": "application/json",
       ...options.headers,
@@ -98,13 +111,15 @@ class ApiClient {
     return this.request("/config/plan");
   }
 
-  // Auth helpers
+  // Auth helpers (for backward compatibility)
   setAuthToken(token: string) {
     localStorage.setItem("accessToken", token);
   }
 
   clearAuthToken() {
     localStorage.removeItem("accessToken");
+    // Also sign out from Supabase
+    supabase.auth.signOut().catch(() => {});
   }
 }
 
