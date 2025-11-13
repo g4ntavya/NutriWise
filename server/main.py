@@ -9,7 +9,7 @@ from contextlib import asynccontextmanager
 import os
 from dotenv import load_dotenv
 
-from server.routes import auth, users, meal_plans, recipes, ingredients, feedback, config
+from server.routes import auth, users, meal_plans, recipes, ingredients, feedback, config, onboarding
 from server.services.supabase_client import get_supabase_client
 from server.middleware.auth import get_current_user
 
@@ -49,6 +49,7 @@ app.add_middleware(
 # Include routers
 app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(users.router, prefix="/api/users", tags=["Users"])
+app.include_router(onboarding.router, prefix="/api/onboarding", tags=["Onboarding"])
 app.include_router(meal_plans.router, prefix="/api/meal-plans", tags=["Meal Plans"])
 app.include_router(recipes.router, prefix="/api/recipes", tags=["Recipes"])
 app.include_router(ingredients.router, prefix="/api/ingredients", tags=["Ingredients"])

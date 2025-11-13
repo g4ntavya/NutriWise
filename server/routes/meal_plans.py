@@ -4,7 +4,7 @@ Meal plan routes with vector-based recommendations and Gemini AI
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import Optional, List
-from server.services.recommendation_service import MealPlanRecommendationService
+from server.services.meal_planning_pipeline import MealPlanningPipeline
 from server.services.supabase_client import get_supabase_client
 from server.middleware.auth import get_current_user, optional_auth
 
@@ -22,43 +22,39 @@ class CreateMealPlanRequest(BaseModel):
 @router.post("")
 async def create_meal_plan(
     request: CreateMealPlanRequest,
-    user: dict = Depends(get_current_user)
+    user: dict = Depends(get_current_user),
+    natural_language: Optional[str] = None
 ):
-    """Create meal plan using vector similarity + Gemini AI"""
-    service = MealPlanRecommendationService()
+    """Create meal plan using complete pipeline (LLM + Deterministic Code)"""
+    pipeline = MealPlanningPipeline()
     
     try:
-        # Generate meal plan using recommendation service
-        meal_plan = await service.generate_personalized_meal_plan(
+        # Update user constraints if provided
+        if request.budget or request.calorie_target:
+            supabase = get_supabase_client()
+            update_data = {}
+            if request.budget:
+                update_data["budget_constraints"] = {
+                    "weekly_budget_inr": request.budget,
+                    "daily_budget_inr": request.budget / 7,
+                    "region": request.region
+                }
+            if request.calorie_target:
+                update_data["nutrition_constraints"] = {
+                    "daily_calories": request.calorie_target
+                }
+            
+            if update_data:
+                supabase.table("users").update(update_data).eq("id", user["id"]).execute()
+        
+        # Generate meal plan using complete pipeline
+        result = await pipeline.generate_meal_plan(
             user_id=user["id"],
-            budget=request.budget,
-            calorie_target=request.calorie_target,
-            dietary_preferences=request.dietary_preferences,
-            health_goals=request.health_goals,
-            allergies=request.allergies,
             duration_days=request.duration_days,
-            region=request.region
+            use_natural_language=natural_language
         )
         
-        # Save to database
-        supabase = get_supabase_client()
-        meal_plan_data = {
-            "user_id": user["id"],
-            "title": f"Meal Plan - {request.duration_days} days",
-            "calorie_target": request.calorie_target,
-            "total_cost": meal_plan.get("totalCost", 0),
-            "budget": request.budget,
-            "duration_days": request.duration_days,
-            "meal_plan_data": meal_plan  # Store full JSON
-        }
-        
-        response = supabase.table("meal_plans").insert(meal_plan_data).execute()
-        
-        if response.data:
-            meal_plan["id"] = response.data[0]["id"]
-            return meal_plan
-        
-        return meal_plan
+        return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to create meal plan: {str(e)}")
 
