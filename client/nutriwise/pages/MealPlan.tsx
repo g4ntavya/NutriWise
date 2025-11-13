@@ -1,60 +1,82 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MealCard from "@/components/MealCard";
-import { RefreshCw, Save, ShoppingCart } from "lucide-react";
-const meal1 = "https://images.unsplash.com/photo-1543352634-46b4609f1b7b?w=800&q=60&auto=format&fit=crop";
-const meal2 = "https://images.unsplash.com/photo-1604908177522-72a3f0dcbf25?w=800&q=60&auto=format&fit=crop";
-const meal3 = "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=60&auto=format&fit=crop";
+import { apiClient } from "@/lib/api";
+import { RefreshCw, Save, ShoppingCart, Loader2, Sparkles } from "lucide-react";
 
 const MealPlan = () => {
-  const meals = [
-    {
-      image: meal1,
-      name: "Paneer Tikka Bowl",
-      ingredients: ["Paneer", "Bell Peppers", "Onions", "Mint Chutney", "Brown Rice"],
-      calories: 420,
-      cost: 150
-    },
-    {
-      image: meal2,
-      name: "Tandoori Chicken & Dal",
-      ingredients: ["Chicken Breast", "Yellow Dal", "Roti", "Mixed Vegetables"],
-      calories: 380,
-      cost: 180
-    },
-    {
-      image: meal3,
-      name: "Masala Oats & Fruits",
-      ingredients: ["Oats", "Banana", "Pomegranate", "Almonds", "Honey"],
-      calories: 320,
-      cost: 100
-    },
-    {
-      image: meal1,
-      name: "Sprouts Salad",
-      ingredients: ["Mixed Sprouts", "Cucumber", "Tomatoes", "Lemon", "Coriander"],
-      calories: 280,
-      cost: 80
-    },
-    {
-      image: meal2,
-      name: "Fish Curry & Rice",
-      ingredients: ["Fish", "Curry Sauce", "Steamed Rice", "Vegetables"],
-      calories: 450,
-      cost: 220
-    },
-    {
-      image: meal3,
-      name: "Fruit & Nut Smoothie",
-      ingredients: ["Mango", "Banana", "Almonds", "Milk", "Dates"],
-      calories: 350,
-      cost: 120
-    }
-  ];
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [mealPlans, setMealPlans] = useState<any[]>([]);
+  const [generating, setGenerating] = useState(false);
 
-  const totalCost = meals.reduce((sum, meal) => sum + meal.cost, 0);
-  const avgCalories = Math.round(meals.reduce((sum, meal) => sum + meal.calories, 0) / meals.length);
+  useEffect(() => {
+    loadMealPlans();
+  }, []);
+
+  const loadMealPlans = async () => {
+    try {
+      setLoading(true);
+      const plans = await apiClient.getMealPlans();
+      setMealPlans(plans);
+    } catch (error: any) {
+      console.error("Error loading meal plans:", error);
+      // If not authenticated, show empty state
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGenerateNew = async () => {
+    try {
+      setGenerating(true);
+      // Get user profile to use for meal plan generation
+      const profile = await apiClient.getProfile().catch(() => null);
+      
+      if (!profile) {
+        navigate("/app/onboarding");
+        return;
+      }
+
+      const nutritionConstraints = profile.nutrition_constraints || {};
+      const budgetConstraints = profile.budget_constraints || {};
+
+      const result = await apiClient.createMealPlan({
+        budget: budgetConstraints.weekly_budget_inr || 2500,
+        calorieTarget: nutritionConstraints.daily_calories || 2000,
+        dietaryPreferences: nutritionConstraints.dietary_restrictions || [],
+        healthGoals: profile.profile_data?.dietary_goal ? [profile.profile_data.dietary_goal] : ["MAINTAIN_HEALTH"],
+        durationDays: 7,
+      });
+
+      if (result.meal_plan?.id) {
+        navigate(`/app/review/${result.meal_plan.id}`);
+      } else {
+        alert("Meal plan generated! Check your meal plans.");
+        loadMealPlans();
+      }
+    } catch (error: any) {
+      if (error.message.includes("401") || error.message.includes("Authentication")) {
+        alert("Please log in to generate meal plans");
+      } else {
+        alert(`Error: ${error.message}`);
+      }
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -65,52 +87,91 @@ const MealPlan = () => {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6">
             <div>
               <h1 className="text-5xl font-bold mb-4 text-foreground">
-                Your <span className="text-primary">Personalized</span> Meal Plan
+                Your <span className="text-primary">Meal Plans</span>
               </h1>
               <p className="text-xl text-muted-foreground">
-                6 delicious meals optimized for your budget and goals
+                AI-powered personalized meal plans tailored to your goals
               </p>
             </div>
             
-            <div className="flex flex-wrap gap-3">
-              <Button variant="outline" className="rounded-full gap-2">
-                <RefreshCw className="h-4 w-4" />
-                Regenerate Plan
-              </Button>
-              <Button variant="secondary" className="rounded-full gap-2">
-                <Save className="h-4 w-4" />
-                Save Plan
-              </Button>
-              <Button className="rounded-full gap-2">
-                <ShoppingCart className="h-4 w-4" />
-                Shop Ingredients
-              </Button>
-            </div>
+            <Button 
+              className="rounded-full gap-2 h-14 px-6"
+              onClick={handleGenerateNew}
+              disabled={generating}
+              size="lg"
+            >
+              {generating ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Generating...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="h-4 w-4" />
+                  Generate New Plan
+                </>
+              )}
+            </Button>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
-            <div className="bg-primary/10 rounded-2xl p-6 border border-primary/20">
-              <p className="text-sm text-muted-foreground mb-1">Total Cost</p>
-              <p className="text-3xl font-bold text-primary">₹{totalCost.toFixed(0)}</p>
-              <p className="text-sm text-muted-foreground mt-1">per day</p>
+          {mealPlans.length === 0 ? (
+            <Card className="p-12 text-center">
+              <Sparkles className="h-16 w-16 mx-auto mb-4 text-primary" />
+              <h2 className="text-2xl font-bold mb-2">No Meal Plans Yet</h2>
+              <p className="text-muted-foreground mb-6">
+                Create your first AI-powered meal plan to get started!
+              </p>
+              <div className="flex gap-4 justify-center">
+                <Button onClick={() => navigate("/app/onboarding")} variant="outline">
+                  Complete Profile First
+                </Button>
+                <Button onClick={handleGenerateNew} disabled={generating}>
+                  {generating ? "Generating..." : "Generate Meal Plan"}
+                </Button>
+              </div>
+            </Card>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {mealPlans.map((plan) => {
+                const planData = plan.meal_plan_data || {};
+                const totalCost = planData.totalCost || plan.total_cost || 0;
+                const avgCalories = planData.averageDailyCalories || plan.calorie_target || 0;
+                
+                return (
+                  <Card 
+                    key={plan.id} 
+                    className="p-6 cursor-pointer hover:shadow-lg transition-shadow"
+                    onClick={() => navigate(`/app/review/${plan.id}`)}
+                  >
+                    <h3 className="text-xl font-bold mb-2">{plan.title || "Meal Plan"}</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      {plan.duration_days || 7} days • Created {new Date(plan.created_at).toLocaleDateString()}
+                    </p>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Total Cost:</span>
+                        <span className="font-bold">₹{totalCost.toFixed(0)}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Avg Calories:</span>
+                        <span className="font-bold">{Math.round(avgCalories)}/day</span>
+                      </div>
+                    </div>
+                    <Button 
+                      className="w-full" 
+                      variant="outline"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/app/review/${plan.id}`);
+                      }}
+                    >
+                      View Details
+                    </Button>
+                  </Card>
+                );
+              })}
             </div>
-            <div className="bg-secondary/10 rounded-2xl p-6 border border-secondary/20">
-              <p className="text-sm text-muted-foreground mb-1">Avg Calories</p>
-              <p className="text-3xl font-bold text-secondary">{avgCalories}</p>
-              <p className="text-sm text-muted-foreground mt-1">per meal</p>
-            </div>
-            <div className="bg-accent/10 rounded-2xl p-6 border border-accent/20">
-              <p className="text-sm text-muted-foreground mb-1">Nutrition Score</p>
-              <p className="text-3xl font-bold text-accent">A+</p>
-              <p className="text-sm text-muted-foreground mt-1">excellent balance</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {meals.map((meal, index) => (
-              <MealCard key={index} {...meal} />
-            ))}
-          </div>
+          )}
         </div>
       </div>
 

@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { DollarSign, TrendingUp, Award } from "lucide-react";
+import { apiClient } from "@/lib/api";
 
 const Budget = () => {
   const [budget, setBudget] = useState([2500]);
@@ -88,7 +89,16 @@ const Budget = () => {
               <Button 
                 size="lg" 
                 className="w-full rounded-full h-14 text-lg"
-                onClick={() => navigate("/app/meal-plan")}
+                onClick={async () => {
+                  // Check if user has profile, if not redirect to onboarding
+                  try {
+                    await apiClient.getProfile();
+                    navigate("/app/meal-plan");
+                  } catch {
+                    // No profile, go to onboarding first
+                    navigate("/app/onboarding");
+                  }
+                }}
               >
                 Generate My Meal Plan
               </Button>
