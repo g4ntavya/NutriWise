@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import NutriwiseRoutes from "./nutriwise/Routes";
 import ProtectedRoute from "@/lib/ProtectedRoute";
 import { AuthProvider } from "@/lib/auth";
+import Onboarding from "./nutriwise/pages/Onboarding";
 
 const queryClient = new QueryClient();
 
@@ -25,8 +26,9 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
-            {/* Mount NutriWise app under /app/* - protect routes except onboarding */}
-            <Route path="/app/onboarding" element={<NutriwiseRoutes />} />
+            {/* Onboarding accessible without auth */}
+            <Route path="/app/onboarding" element={<Onboarding />} />
+            {/* All other /app/* routes require authentication */}
             <Route path="/app/*" element={<ProtectedRoute><NutriwiseRoutes /></ProtectedRoute>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
