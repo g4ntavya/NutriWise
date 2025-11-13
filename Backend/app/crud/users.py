@@ -25,6 +25,7 @@ async def list_users(
     session: AsyncSession, q: Optional[str], include_deleted: bool,
     sort: str, order: str, limit: int, offset: int
 ) -> Tuple[int, List[User]]:
+    print("inside list users")
     stmt = select(User)
     if not include_deleted:
         stmt = stmt.where(User.deleted_at.is_(None))
@@ -52,13 +53,15 @@ async def update_user(session: AsyncSession, user: User, data: dict) -> User:
     await session.flush()
     return user
 
-async def soft_delete_user(session: AsyncSession, user: User) -> None:
+async def soft_delete_user(session: AsyncSession, user: User) -> bool:
     from datetime import datetime
     user.is_active = False
     user.deleted_at = datetime.utcnow()
     session.add(user)
     await session.flush()
+    return True
 
-async def hard_delete_user(session: AsyncSession, user: User) -> None:
+async def hard_delete_user(session: AsyncSession, user: User) -> bool:
     await session.delete(user)
     await session.flush()
+    return True

@@ -1,6 +1,7 @@
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, Body, status
 from sqlalchemy.ext.asyncio import AsyncSession
+from datetime import datetime, timezone
 from app.deps import db_session
 from app.schemas import UserCreate, UserOut, UserUpdate, ApiError, UsersList
 from app.crud.users import (
@@ -9,7 +10,12 @@ from app.crud.users import (
     soft_delete_user, hard_delete_user
 )
 
+
+
+
+
 router = APIRouter(prefix="/users", tags=["Users"])
+
 
 @router.post(
     "",
@@ -20,9 +26,11 @@ router = APIRouter(prefix="/users", tags=["Users"])
     description="Create a new user. Email must be unique."
 )
 async def create_user_ep(payload: UserCreate, session: AsyncSession = Depends(db_session)):
+    print("payload", payload)
     if await get_user_by_email(session, payload.email):
         raise HTTPException(status_code=409, detail="Email already exists")
     user = await create_user(session, **payload.model_dump())
+    print("user", user)
     return UserOut.model_validate(user.__dict__)
 
 @router.get(
@@ -43,7 +51,7 @@ async def list_users_ep(
     limit = page_size
     offset = (page - 1) * page_size
     total, rows = await list_users(session, q, include_deleted, sort, order, limit, offset)
-    items = [UserOut.model_validate(r.__dict__) for r in rows]
+    items = [UserOut.model_validate(r.__dict__,  from_attributes=True) for r in rows]
     print("items,", items)
     return {"total": total, "items": items}
 
@@ -57,7 +65,7 @@ async def get_user_ep(user_id: str, session: AsyncSession = Depends(db_session))
     user = await get_user_by_id(session, user_id)
     if not user:
         raise HTTPException(404, "User not found")
-    return UserOut.model_validate(user.__dict__)
+    return UserOut.model_validate(user.__dict__, from_attributes=True)
 
 @router.patch(
     "/{user_id}",
@@ -84,8 +92,9 @@ async def update_user_ep(
         if existing and existing.id != user.id:
             raise HTTPException(409, "Email already exists")
     data = payload.model_dump(exclude_unset=True)
+    print("data", data)
     updated = await repo_update_user(session, user, data)
-    return UserOut.model_validate(updated.__dict__)
+    return UserOut.model_validate(updated.__dict__, from_attributes=True)
 
 @router.delete(
     "/{user_id}",
@@ -100,10 +109,11 @@ async def delete_user_ep(
     session: AsyncSession = Depends(db_session)
 ):
     user = await get_user_by_id(session, user_id)
+    print("user", user)
     if not user:
         raise HTTPException(404, "User not found")
     if hard:
-        await hard_delete_user(session, user)
+       result= await hard_delete_user(session, user)
     else:
-        await soft_delete_user(session, user)
-    return
+        result = await soft_delete_user(session, user)
+    return result

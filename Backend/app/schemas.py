@@ -1,6 +1,6 @@
 from typing import Optional, Literal, List
 from pydantic import BaseModel, EmailStr, Field
-
+from datetime import datetime
 Role = Literal["user", "admin"]
 
 class ApiError(BaseModel):
@@ -14,6 +14,8 @@ class UserBase(BaseModel):
     is_active: bool = Field(True, examples=[True])
 
 class UserCreate(UserBase):
+    created_at: str
+    updated_at: str
     """Payload for creating a user."""
 
 class UserUpdate(BaseModel):
@@ -25,9 +27,9 @@ class UserUpdate(BaseModel):
 
 class UserOut(UserBase):
     id: str
-    created_at: str
-    updated_at: str
-    deleted_at: Optional[str] = None
+    created_at: datetime
+    updated_at: datetime
+    deleted_at: Optional[datetime] = None
 
 class UsersList(BaseModel):
     total: int = Field(..., examples=[42])

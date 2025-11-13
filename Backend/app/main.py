@@ -17,7 +17,7 @@ app = FastAPI(
     version="1.0.0",
     description=(
         "MySQL-backed API with User CRUD.\n\n"
-        "Includes soft delete, pagination, search, and OpenAPI examples."
+        "Includes soft delete, pagination, search, and OpenAPI"
     ),
     contact={"name": "NutriWise", "email": "support@nutriwise.app"},
     license_info={"name": "MIT"},
@@ -39,7 +39,7 @@ async def maybe_apply_sql():
 @app.get("/health", tags=["System"])
 def health():
     return {"status": "ok"}
-@app.get("/", include_in_schema=False)
-async def root():
-    return RedirectResponse(url="/docs")
+# @app.get("/", include_in_schema=False)
+# async def root():
+#     return RedirectResponse(url="/docs")
 app.include_router(users_router)
