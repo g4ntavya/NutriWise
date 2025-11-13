@@ -1,0 +1,218 @@
+// Prisma schema for NutriWise
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AuthProvider {
+  GOOGLE
+  FACEBOOK
+  EMAIL
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
+}
+
+enum HealthGoal {
+  LOSE_WEIGHT
+  GAIN_MUSCLE
+  MAINTAIN_HEALTH
+  IMPROVE_ENERGY
+}
+
+enum DietaryPreference {
+  VEGETARIAN
+  VEGAN
+  NON_VEGETARIAN
+  GLUTEN_FREE
+  DAIRY_FREE
+  KETO
+  PALEO
+}
+
+model User {
+  id                String        @id @default(uuid())
+  email             String        @unique
+  name              String?
+  avatarUrl         String?
+  authProvider      AuthProvider  @default(EMAIL)
+  providerId        String?       @unique
+  budgetDefault     Float?        @default(2500)
+  dietaryPreferences Json?        // Array of DietaryPreference
+  healthGoals       Json?         // Array of HealthGoal
+  allergies         Json?         // Array of strings
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  mealPlans         MealPlan[]
+  feedbacks         Feedback[]
+  refreshTokens     RefreshToken[]
+
+  @@index([email])
+  @@index([providerId])
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+}
+
+model MealPlan {
+  id                String   @id @default(uuid())
+  userId            String
+  title             String?
+  description       String?
+  calorieTarget     Float
+  macroDistribution Json?    // {protein, carbs, fat} percentages
+  totalCost         Float
+  durationDays      Int      @default(7)
+  budget            Float
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  days              MealPlanDay[]
+  ingredients       MealPlanIngredient[]
+  feedbacks         Feedback[]
+
+  @@index([userId])
+}
+
+model MealPlanDay {
+  id          String   @id @default(uuid())
+  mealPlanId String
+  dayIndex    Int      // 0-6 for week
+  totalCalories Float
+  totalCost   Float
+  createdAt   DateTime @default(now())
+
+  mealPlan    MealPlan @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+  meals       Meal[]
+
+  @@index([mealPlanId])
+}
+
+model Meal {
+  id          String   @id @default(uuid())
+  mealPlanDayId String
+  name        String
+  mealType    MealType
+  recipeId    String?
+  servings    Float    @default(1)
+  cost        Float
+  calories    Float
+  nutrition   Json?    // {protein, carbs, fat, fiber, etc.}
+  createdAt   DateTime @default(now())
+
+  mealPlanDay MealPlanDay @relation(fields: [mealPlanDayId], references: [id], onDelete: Cascade)
+  recipe      Recipe?     @relation(fields: [recipeId], references: [id], onDelete: SetNull)
+
+  @@index([mealPlanDayId])
+  @@index([recipeId])
+}
+
+model Recipe {
+  id              String   @id @default(uuid())
+  name            String
+  description     String?
+  instructions    String?  @db.Text
+  imageUrl        String?
+  cuisine         String?
+  tags            String[] // Array of tags
+  avgRating       Float    @default(0)
+  totalTime       Int?     // in minutes
+  calories        Float
+  macroBreakdown  Json?    // {protein, carbs, fat} per serving
+  servings        Float    @default(1)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  meals           Meal[]
+  ingredients     RecipeIngredient[]
+  feedbacks       Feedback[]
+
+  @@index([name])
+  @@index([cuisine])
+}
+
+model Ingredient {
+  id              String   @id @default(uuid())
+  name            String
+  category        String?  // e.g., "Vegetables", "Proteins", "Grains"
+  unit            String   @default("g") // g, ml, piece
+  caloriesPerUnit Float
+  macrosPerUnit   Json?    // {protein, carbs, fat} per unit
+  defaultPrice    Float    // per unit in INR
+  localPrices     Json?    // {region: price} mapping
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  recipeIngredients RecipeIngredient[]
+  mealPlanIngredients MealPlanIngredient[]
+
+  @@index([name])
+  @@index([category])
+}
+
+model RecipeIngredient {
+  id          String   @id @default(uuid())
+  recipeId    String
+  ingredientId String
+  quantity    Float
+
+  recipe      Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  ingredient  Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+
+  @@unique([recipeId, ingredientId])
+  @@index([recipeId])
+  @@index([ingredientId])
+}
+
+model MealPlanIngredient {
+  id          String   @id @default(uuid())
+  mealPlanId String
+  ingredientId String
+  totalQuantity Float
+  estimatedCost Float
+
+  mealPlan    MealPlan  @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+  ingredient  Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+
+  @@unique([mealPlanId, ingredientId])
+  @@index([mealPlanId])
+  @@index([ingredientId])
+}
+
+model Feedback {
+  id        String   @id @default(uuid())
+  userId    String
+  mealPlanId String?
+  recipeId  String?
+  rating    Int      // 1-5
+  comment   String?  @db.Text
+  createdAt DateTime @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mealPlan  MealPlan? @relation(fields: [mealPlanId], references: [id], onDelete: SetNull)
+  recipe    Recipe?   @relation(fields: [recipeId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([mealPlanId])
+  @@index([recipeId])
+}
+

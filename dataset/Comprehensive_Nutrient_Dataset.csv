@@ -1,0 +1,51 @@
+Category,Food,ALA (g),Table,Food Group,g/Portion,Energy (Kcal),Protein (g),Carbohydrate (g),Fat (g),Nutrients,Food Groups,Foods,Nutrient content per 100 g edible portion
+Cereal/Millet,Wheat & Pearl millet (bajra),0.14,ALA Content,,,,,,,,,,
+Pulses,"Blackgram (kala chana), kidney beans (rajmah) & cowpea (lobia)",0.5,ALA Content,,,,,,,,,,
+Pulses,Other pulses,0.16,ALA Content,,,,,,,,,,
+Vegetables,Green leafy,0.16,ALA Content,,,,,,,,,,
+Vegetables,Other vegetables,0.025,ALA Content,,,,,,,,,,
+Fruits,-,0.025,ALA Content,,,,,,,,,,
+Spices,Fenugreek seed (methi),2.0,ALA Content,,,,,,,,,,
+Spices,Mustard (sarson),10.0,ALA Content,,,,,,,,,,
+Unconventional,Flaxseed (alsi),20.0,ALA Content,,,,,,,,,,
+Unconventional,Perilla seeds (Bhanjira),33.0,ALA Content,,,,,,,,,,
+,,,Portion Size & Nutrients,Cereals & millets,30.0,100.0,3.0,20,0.8,,,,
+,,,Portion Size & Nutrients,Pulses,30.0,100.0,6.0,15,0.7,,,,
+,,,Portion Size & Nutrients,Egg,50.0,85.0,7.0,-,7.0,,,,
+,,,Portion Size & Nutrients,Meat/chicken/fish,50.0,100.0,9.0,-,7.0,,,,
+,,,Portion Size & Nutrients,Milk & milk products,100.0,70.0,3.0,5,3.0,,,,
+,,,Portion Size & Nutrients,Roots & Tubers,100.0,80.0,1.3,18,-,,,,
+,,,Portion Size & Nutrients,Green leafy vegetables,100.0,46.0,3.6,-,0.4,,,,
+,,,Portion Size & Nutrients,Other vegetables,100.0,28.0,1.7,-,0.2,,,,
+,,,Portion Size & Nutrients,Fruits,100.0,40.0,-,10,-,,,,
+,,,Portion Size & Nutrients,Sugar,5.0,20.0,-,5,-,,,,
+,,,Portion Size & Nutrients,Fat & Oils (visible),5.0,45.0,-,-,5.0,,,,
+,,,Nutrient-rich Foods,,,,,,,Energy,Cereals and Tubers,"Rice, wheat and tapioca",340 Kcal
+,,,Nutrient-rich Foods,,,,,,,Energy,Nuts and Oilseeds,"Almond, cashewnut, dry coconut and groundnut",600 Kcal
+,,,Nutrient-rich Foods,,,,,,,Energy,"Vegetable oil, ghee and Vanaspati",-,900 Kcal
+,,,Nutrient-rich Foods,,,,,,,Protein,Pulses and Legumes,"Bengalgram, blackgram, greengram, lentil and redgram",22 g
+,,,Nutrient-rich Foods,,,,,,,Protein,Nuts and Oilseeds,"Groundnuts, cashewnuts and almond",23 g
+,,,Nutrient-rich Foods,,,,,,,Protein,Fish,Fish,20 g
+,,,Nutrient-rich Foods,,,,,,,Protein,Meat and Poultry,"Meat, Egg white","22 g, 11 g"
+,,,Nutrient-rich Foods,,,,,,,Protein,Milk products,"Cheese, khoa, skimmed milk powder (cow) and whole milk powder (cow)",30 g
+,,,Nutrient-rich Foods,,,,,,,Beta-Carotene,Leafy vegetables,"Ambat chukka, coriander leaves, spinach, mint, radish leaves, fenugreek, gogu",2–15 mg
+,,,Nutrient-rich Foods,,,,,,,Beta-Carotene,Other vegetables,"Pumpkin, carrot, green chillies",1–6.5 mg
+,,,Nutrient-rich Foods,,,,,,,Beta-Carotene,Fruits,"Ripe mango, papaya",0.9–2.0 mg
+,,,Nutrient-rich Foods,,,,,,,Folic Acid,Green leafy vegetables,"Amaranth, ambat chukka, mint, spinach",120 mg
+,,,Nutrient-rich Foods,,,,,,,Folic Acid,Pulses,"Bengalgram, blackgram, greengram, redgram",120 mg
+,,,Nutrient-rich Foods,,,,,,,Folic Acid,Oilseeds,Gingelly and soyabean,180 mg
+,,,Nutrient-rich Foods,,,,,,,Iron,Green leafy vegetables,"Amaranth, bengalgram leaves, cauliflower greens, radish leaves",18–40 mg
+,,,Nutrient-rich Foods,,,,,,,Calcium,Cereals and Legumes,"Ragi, bengalgram, rajmah, soyabean",200–340 mg
+,,,Nutrient-rich Foods,,,,,,,Calcium,Green leafy vegetables,"Amaranth, curry leaves, agathi, colocasia",500–1540 mg
+,,,Nutrient-rich Foods,,,,,,,Calcium,Nuts and Oilseeds,"Coconut, almond, mustard seeds, gingelly, cumin",130–1450 mg
+,,,Nutrient-rich Foods,,,,,,,Calcium,Fish,"Bacha, katla, mrigal, pran, rohu",320–650 mg
+,,,Nutrient-rich Foods,,,,,,,Calcium,Milk & Milk Products,"Buffalo, goat, curds, cheese, khoa",120–1370 mg
+,,,Nutrient-rich Foods,,,,,,,Vitamin C,Green leafy vegetables,"Agathi, cabbage, coriander leaves, knol-khol greens",120–220 mg
+,,,Nutrient-rich Foods,,,,,,,Vitamin C,Other vegetables,"Chillies (capsicum), green chillies",117–137 mg
+,,,Nutrient-rich Foods,,,,,,,Vitamin C,Fruits,"Amla, guava",212–600 mg
+,,,Nutrient-rich Foods,,,,,,,Fibre,Cereals and Pulses,"Wheat, jowar, bajra, ragi, maize, legumes",>10 g
+,,,Nutrient-rich Foods,,,,,,,Vitamin A,Fats and edible oils,"Butter, ghee (cow milk) and hydrogenated oil (fortified)",700 mg
+,,,Nutrient-rich Foods,,,,,,,Riboflavin,Cereal grains and products,"Bajra, barley, ragi, wheat germs and brown bread",0.2 mg
+,,,Nutrient-rich Foods,,,,,,,Riboflavin,Pulses and legumes,"Bengalgram, blackgram, greengram, lentil, soyabean",0.2 mg
+,,,Nutrient-rich Foods,,,,,,,Riboflavin,Leafy vegetables,"Amaranthus, carrot leaves, curry leaves, mint, spinach",0.25 mg
+,,,Nutrient-rich Foods,,,,,,,Riboflavin,Nuts and Oilseeds,"Gingelly, mustard, niger, sunflower, almond, walnut",0.3 mg

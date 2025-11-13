@@ -1,0 +1,104 @@
+Item,Calories_kcal_per100g,Protein_g,Carbs_g,Fat_g,Fiber_g,Calcium_mg,Iron_mg,VitaminC_mg,Price_INR_per_kg,Nutrition_source,Price_source
+"Rice, white (raw)",365,7.1,80.4,0.7,1.3,28.0,1.2,0.0,85.0,USDA FoodData Central,BigBasket sample
+Basmati rice (raw),350,8.1,77.2,0.5,0.7,10.0,0.4,0.0,100.0,USDA FoodData Central,BigBasket sample
+Brown rice (raw),370,7.5,77.0,2.7,3.5,23.0,0.8,0.0,90.0,USDA FoodData Central,BigBasket sample
+"Wheat flour (atta, whole)",339,13.7,72.6,1.9,10.7,40.0,3.6,0.0,40.0,IFCT / USDA,Local market
+Maida (refined wheat flour),360,10.0,76.0,1.0,2.7,15.0,1.1,0.0,45.0,USDA,BigBasket
+"Ragi (finger millet, raw)",336,7.3,72.6,1.3,3.6,344.0,3.9,0.0,80.0,IFCT / USDA,Local market
+"Jowar (sorghum, raw)",329,10.6,72.6,3.4,6.7,32.0,4.4,0.0,60.0,USDA / IFCT,Local market
+"Bajra (pearl millet, raw)",361,11.6,67.0,5.0,1.2,42.0,6.2,0.0,70.0,IFCT / USDA,Local market
+Sattu (roasted gram flour),400,22.0,52.0,5.0,15.0,120.0,6.0,0.0,90.0,IFCT,Local market
+"Poha (flattened rice, dry)",350,7.0,79.0,0.5,1.2,10.0,0.6,0.0,90.0,USDA / local tables,BigBasket
+"Chickpea (chana, raw)",364,19.3,60.6,6.0,17.4,49.0,6.2,4.0,90.0,USDA / IFCT,BigBasket
+"Tur/toor dal (pigeon pea, raw)",343,22.0,58.0,1.6,15.0,277.0,5.1,0.0,120.0,IFCT / USDA,Local market
+"Moong dal (split mung, raw)",347,24.0,60.0,1.2,16.3,80.0,4.7,0.0,110.0,USDA / IFCT,BigBasket
+"Urad dal (split black gram, raw)",347,25.2,58.9,1.6,18.3,277.0,7.6,0.0,120.0,IFCT / USDA,Local market
+"Masoor dal (red lentil, raw)",352,25.8,60.0,1.1,10.0,45.0,7.5,0.0,100.0,USDA / IFCT,BigBasket
+Green gram whole (moong whole),347,23.9,56.0,1.2,16.3,120.0,4.7,0.0,110.0,USDA / IFCT,Local market
+"Rajma (kidney beans, raw)",329,24.0,60.0,0.8,13.6,60.0,5.2,0.0,120.0,USDA,Local market
+"Lentils, brown (cooked equiv omitted)",352,25.0,60.0,1.2,11.0,40.0,6.5,0.0,100.0,USDA / IFCT,BigBasket
+Soybean (raw),446,36.5,30.2,19.9,9.3,277.0,15.7,6.0,140.0,USDA,BigBasket
+"Bengal gram (chana dal, raw)",378,20.5,57.8,6.7,10.0,49.0,4.5,0.0,95.0,IFCT,Local market
+Sorghum flour (jowar flour),329,11.0,72.0,3.0,6.0,30.0,4.0,0.0,80.0,IFCT / USDA,Local market
+Bajra flour,361,11.6,67.0,5.0,1.2,42.0,6.2,0.0,85.0,IFCT,Local market
+Ragi flour,328,7.9,73.0,1.7,3.9,350.0,3.5,0.0,90.0,IFCT,BigBasket
+"Corn (maize, yellow, raw)",365,9.4,74.3,4.7,7.3,7.0,2.7,0.0,55.0,USDA,BigBasket
+Sooji (semolina),360,12.7,72.0,1.0,3.9,17.0,1.0,0.0,70.0,USDA,BigBasket
+Spinach (raw),23,2.9,3.6,0.4,2.2,99.0,2.7,28.1,120.0,USDA / IFCT,BigBasket
+"Fenugreek leaves (methi, raw)",49,3.0,5.0,0.6,4.0,50.0,1.9,5.0,150.0,IFCT,Local market
+Coriander leaves (cilantro),23,2.1,3.7,0.5,2.8,67.0,1.8,27.0,120.0,USDA / IFCT,Local market
+Mustard greens,27,2.9,4.7,0.4,3.2,103.0,1.5,70.0,130.0,USDA,Local market
+Amaranth leaves,23,2.7,3.1,0.4,2.1,215.0,2.5,43.0,140.0,IFCT,Local market
+Drumstick (moringa) leaves,64,9.4,8.3,1.4,2.0,440.0,4.0,51.7,180.0,IFCT,Local market
+"Okra (ladyfinger, raw)",33,2.0,7.5,0.2,3.2,82.0,0.6,23.0,60.0,USDA / IFCT,BigBasket
+"Brinjal (eggplant, raw)",25,1.0,5.9,0.2,3.0,9.0,0.2,2.2,60.0,USDA,BigBasket
+Bottle gourd (lauki),14,0.6,3.4,0.0,0.5,26.0,0.2,10.0,40.0,IFCT,Local market
+Bitter gourd (karela),17,1.0,3.7,0.2,2.8,19.0,0.7,84.0,80.0,IFCT,Local market
+Potato (raw),77,2.0,17.5,0.1,2.2,12.0,0.8,20.0,30.0,USDA / IFCT,BigBasket
+Sweet potato (raw),86,1.6,20.1,0.1,3.0,30.0,0.6,2.4,50.0,USDA,Local market
+Yam (raw),118,1.5,27.9,0.2,4.1,21.0,0.5,1.4,60.0,IFCT,Local market
+"Tapioca (cassava, raw)",160,1.4,38.1,0.3,1.8,16.0,1.6,20.0,25.0,USDA / IFCT,Local market
+"Arbi (taro, raw)",142,2.0,34.6,0.1,5.1,43.0,1.2,0.0,80.0,IFCT,Local market
+Banana (raw),89,1.1,22.8,0.3,2.6,5.0,0.3,8.7,60.0,USDA,BigBasket
+Mango (raw),60,0.8,15.0,0.4,1.6,11.0,0.2,36.4,120.0,USDA / IFCT,Seasonal market
+Apple (raw),52,0.3,14.0,0.2,2.4,6.0,0.1,4.6,200.0,USDA,BigBasket
+Guava (raw),68,2.6,14.3,1.0,5.4,18.0,0.3,228.0,140.0,USDA / IFCT,BigBasket
+Papaya (raw),43,0.5,10.8,0.3,1.7,20.0,0.3,60.9,80.0,USDA,BigBasket
+Pineapple (raw),50,0.5,13.1,0.1,1.4,13.0,0.5,47.8,80.0,USDA,BigBasket
+Orange (raw),47,0.9,11.8,0.1,2.4,40.0,0.1,53.2,120.0,USDA,BigBasket
+Pomegranate (raw),83,1.7,18.7,1.2,4.0,10.0,0.3,10.2,220.0,USDA,BigBasket
+Watermelon (raw),30,0.6,7.6,0.2,0.4,11.0,0.2,8.1,30.0,USDA,BigBasket
+Muskmelon (raw),34,0.8,8.2,0.2,0.9,9.0,0.2,18.0,70.0,USDA,BigBasket
+Almonds (dry),579,21.2,21.6,49.9,12.5,264.0,3.7,0.0,1200.0,USDA,BigBasket
+Cashew nuts (dry),553,18.2,30.2,43.9,3.3,37.0,6.7,0.5,900.0,USDA,BigBasket
+Peanuts (dry),567,25.8,16.1,49.2,8.5,92.0,4.6,0.0,250.0,USDA,BigBasket
+Walnut (dry),654,15.2,13.7,65.2,6.7,98.0,2.9,1.3,1400.0,USDA,BigBasket
+Flaxseed (alsi),534,18.3,28.9,42.2,27.3,255.0,5.7,0.0,160.0,USDA,BigBasket
+Ghee (clarified butter),900,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1000.0,USDA,BigBasket
+Mustard oil,884,0.0,0.0,100.0,0.0,0.0,0.0,0.0,220.0,USDA,BigBasket
+Sunflower oil,884,0.0,0.0,100.0,0.0,0.0,0.0,0.0,200.0,USDA,BigBasket
+Coconut oil,892,0.0,0.0,100.0,0.0,0.0,0.0,0.0,300.0,USDA,BigBasket
+"Milk, whole (per 100g)",60,3.2,4.8,3.3,0.0,120.0,0.03,0.0,55.0,USDA,BigBasket
+Curd/Yogurt (whole milk),61,3.5,4.7,3.3,0.0,110.0,0.05,0.5,80.0,USDA,BigBasket
+Paneer (cottage cheese),265,18.3,1.2,20.8,0.0,208.0,0.5,0.0,450.0,USDA,Local dairies
+Whey powder (skim milk powder approx),360,34.0,52.0,1.0,0.0,900.0,0.5,0.0,600.0,Manufacturer data,BigBasket
+"Chicken breast (raw, skinless)",165,31.0,0.0,3.6,0.0,15.0,1.0,0.0,220.0,USDA,BigBasket
+Mutton/goat (raw),294,25.6,0.0,21.2,0.0,20.0,1.8,0.0,450.0,USDA,Local market
+"Beef (raw, average)",250,26.1,0.0,15.0,0.0,18.0,2.6,0.0,450.0,USDA,Local market
+"Fish, Rohu (raw, edible)",130,17.6,0.0,6.0,0.0,30.0,1.0,0.0,300.0,IFCT / USDA,Local market
+"Fish, Salmon (raw)",208,20.4,0.0,13.4,0.0,9.0,0.8,0.0,900.0,USDA,BigBasket
+"Tea leaves (dry, powder)",1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1200.0,Typical dry leaves,BigBasket
+Coffee powder (instant),2,0.1,0.0,0.0,0.0,50.0,0.1,0.0,1500.0,Manufacturer,BigBasket
+Tobacco (not food),,,,,,,,,,,
+Turmeric powder,312,9.7,67.8,3.3,21.1,168.0,55.0,0.7,400.0,IFCT / USDA,BigBasket
+Cumin seeds,375,17.8,44.2,22.3,10.5,931.0,66.4,7.7,600.0,IFCT / USDA,BigBasket
+Coriander seeds,298,12.4,54.9,12.4,41.9,709.0,16.3,21.0,300.0,USDA / IFCT,BigBasket
+Black pepper (ground),255,10.4,64.8,3.3,26.5,443.0,9.7,21.0,1200.0,USDA,BigBasket
+Sugar (table),387,0.0,100.0,0.0,0.0,1.0,0.0,0.0,45.0,USDA,BigBasket
+Jaggery (gur),383,0.4,98.0,0.1,0.0,80.0,0.6,0.0,60.0,IFCT,Local market
+Besan (gram flour),387,22.0,58.0,6.7,10.0,45.0,4.9,0.0,85.0,IFCT / USDA,BigBasket
+Soya chunks (dry),345,52.0,33.0,0.5,6.0,350.0,15.7,0.0,200.0,Manufacturer / USDA,BigBasket
+Carrot (raw),41,0.9,9.6,0.2,2.8,33.0,0.3,5.9,70.0,USDA,BigBasket
+Cabbage (raw),25,1.3,5.8,0.1,2.5,40.0,0.5,36.6,45.0,USDA,BigBasket
+Cauliflower (raw),25,1.9,4.9,0.3,2.0,22.0,0.4,48.2,80.0,USDA,BigBasket
+Garlic (raw),149,6.4,33.1,0.5,2.1,181.0,1.7,31.2,400.0,USDA,BigBasket
+Ginger (raw),80,1.8,17.8,0.8,2.0,16.0,0.6,5.0,300.0,USDA,BigBasket
+Green peas (raw),81,5.4,14.5,0.4,5.1,25.0,1.5,40.0,90.0,USDA,BigBasket
+Green chilli (raw),40,2.0,8.8,0.7,1.5,18.0,0.6,242.0,200.0,IFCT,Local market
+Beetroot (raw),43,1.6,9.6,0.2,2.8,16.0,0.8,4.9,60.0,USDA,BigBasket
+Pumpkin (raw),26,1.0,6.5,0.1,0.5,21.0,0.8,9.0,40.0,USDA,BigBasket
+Jackfruit (raw),95,1.7,23.0,0.6,1.5,24.0,0.6,13.7,80.0,IFCT,Local market
+Bread (white),265,9.0,49.0,3.2,2.7,120.0,3.6,0.0,80.0,USDA / Manufacturer,BigBasket
+Bread (whole wheat),247,13.0,41.0,4.2,6.0,150.0,2.8,0.0,120.0,Manufacturer,BigBasket
+Paneer (low-fat),143,18.0,1.2,7.0,0.0,200.0,0.5,0.0,480.0,Manufacturer,Local dairies
+Sambar powder (mix),350,20.0,45.0,7.0,18.0,200.0,5.0,0.0,150.0,Manufacturer / IFCT,BigBasket
+"Rice, boiled (cooked)",130,2.7,28.2,0.3,0.4,10.0,0.2,0.0,120.0,USDA,Local market
+"Wheat flour, roasted (atta rava)",360,12.0,70.0,1.5,5.0,40.0,3.6,0.0,85.0,Local,BigBasket
+Puffed rice (murmura),390,7.5,85.0,0.4,2.0,10.0,0.6,0.0,60.0,Manufacturer data,BigBasket
+Kuttu flour (buckwheat),343,13.3,71.5,3.1,10.0,86.0,2.2,0.0,300.0,IFCT,Local market
+Amaranth (raw seed),371,13.6,65.2,7.0,6.7,159.0,7.6,0.0,300.0,IFCT,Local market
+Raisins (dry grapes),299,3.1,79.2,0.5,3.7,50.0,1.9,3.5,400.0,USDA,BigBasket
+Dates (dried),277,1.8,75.0,0.2,6.7,64.0,1.0,0.4,200.0,USDA,BigBasket
+Apricot (dried),241,3.4,62.6,0.5,7.3,55.0,2.7,0.0,600.0,USDA,BigBasket
+"Coconut (fresh, kernel)",354,3.3,15.2,33.5,9.0,14.0,2.4,3.3,150.0,USDA,BigBasket
+Coconut (dry/copra),660,6.9,6.2,64.0,16.3,36.0,3.3,0.0,300.0,USDA,BigBasket
