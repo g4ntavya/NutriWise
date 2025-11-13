@@ -1,0 +1,7 @@
+[
+  { "name": "Rice", "price": 40, "protein": 2.7, "calories": 130 },
+  { "name": "Dal", "price": 90, "protein": 9, "calories": 116 },
+  { "name": "Eggs", "price": 6, "protein": 6, "calories": 78 },
+  { "name": "Potato", "price": 30, "protein": 2, "calories": 87 },
+  { "name": "Roti", "price": 5, "protein": 3, "calories": 110 }
+]
