@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/lib/auth";
 
 interface HeaderProps {
   onLoginClick: () => void;
@@ -16,6 +17,8 @@ export default function Header({ onLoginClick }: HeaderProps) {
       setIsMobileMenuOpen(false);
     }
   };
+
+  const auth = useAuth();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/20 backdrop-blur-md border-b border-[#212832]">
@@ -73,15 +76,28 @@ export default function Header({ onLoginClick }: HeaderProps) {
             About
           </button>
           
-          <button
-            onClick={() => {
-              onLoginClick();
-              setIsMobileMenuOpen(false);
-            }}
-            className="px-5 py-2 rounded border border-[#181E4B] text-[#212832] font-['Helvetica_Neue',sans-serif] text-[15px] font-medium hover:bg-[#181E4B] hover:text-white transition-colors"
-          >
-            Sign up
-          </button>
+          {auth.user ? (
+            <div className="flex items-center gap-3">
+              <button
+                onClick={async () => {
+                  await auth.signOut();
+                }}
+                className="px-4 py-2 rounded border border-[#181E4B] text-[#212832] bg-transparent hover:bg-[#181E4B] hover:text-white transition-colors"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => {
+                onLoginClick();
+                setIsMobileMenuOpen(false);
+              }}
+              className="px-5 py-2 rounded border border-[#181E4B] text-[#212832] font-['Helvetica_Neue',sans-serif] text-[15px] font-medium hover:bg-[#181E4B] hover:text-white transition-colors"
+            >
+              Sign up
+            </button>
+          )}
 
           <div className="flex items-center gap-2 cursor-pointer">
             <span className="text-[#212832] font-['Helvetica_Neue',sans-serif] text-[15px] font-medium">

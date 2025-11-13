@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import NutriwiseRoutes from "./nutriwise/Routes";
+import ProtectedRoute from "@/lib/ProtectedRoute";
+import { AuthProvider } from "@/lib/auth";
 
 const queryClient = new QueryClient();
 
@@ -20,13 +22,15 @@ const App = () => (
     {/* LoginOverlay is mounted by pages as needed (Index mounts it with
       controlled props). */}
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* Mount NutriWise app under /app/* */}
-          <Route path="/app/*" element={<NutriwiseRoutes />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            {/* Mount NutriWise app under /app/* - protect this route so only signed-in users can access it */}
+            <Route path="/app/*" element={<ProtectedRoute><NutriwiseRoutes /></ProtectedRoute>} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
