@@ -63,7 +63,7 @@ export default function Index() {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          d="M0 50 L341 10"
+                          d="M0 55 L341 50"
                           stroke="#DF6951"
                           strokeWidth="8"
                           fill="none"
