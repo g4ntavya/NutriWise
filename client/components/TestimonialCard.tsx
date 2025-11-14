@@ -15,7 +15,7 @@ const TestimonialCard = ({ name, role, content, rating, initials }: TestimonialC
     <Card className="p-6 bg-card border-border rounded-2xl hover:shadow-lg transition-shadow">
       <div className="flex gap-1 mb-4">
         {Array.from({ length: rating }).map((_, i) => (
-          <Star key={i} className="h-4 w-4 fill-accent text-accent" />
+          <Star key={i} className="h-4 w-4 fill-[#DF6951] text-[#DF6951]" />
         ))}
       </div>
       <p className="text-foreground mb-4 italic">"{content}"</p>
